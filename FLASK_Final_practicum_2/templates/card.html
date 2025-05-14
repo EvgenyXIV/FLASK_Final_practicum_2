@@ -1,0 +1,58 @@
+<!-- НАСЛЕДНИК ШАБЛОНА index.html -->
+<!-- Обеспечивает содержание блоков "title" и "body" на странице "/card"-->
+
+{% extends 'index.html' %}
+ 
+<!--здесь мы записываем код, который будет исполняться в базовом шаблоне index.html в теге <title> -->
+{% block title %}card{% endblock %}
+
+<!--здесь мы записываем код, который будет исполняться в базовом шаблоне index.html внутри тега <body>-->
+{% block content %} 
+
+    <!-- Заявка на вывод на главной странице текущего содержания таблицы Card базы данных diary.db   -->
+    <a href="/card"><img src="/static/img/card_all.png" alt="Дневник почитать"></a><br>
+    <form action="/", method="POST">
+        <label for="print_card">Почитать: ("Y"="y") :</label>
+        <input type="text" id="print_card" name="print_card">
+        <button type="submit">Отправить</button><br><br>
+    </form>
+
+    <!-- Создание заявки на ИЗМЕНЕНИЕ ЗАПИСИ по id в таблице Card базы данных diary.db -->
+    <a href="/card"><img src="/static/img/card_change.png" alt="Изменить сообщение"></a><br>
+    <form action="/", method="POST">
+        <label for="change_id">"ИЗМЕНИТЬ сообщение" id:</label>
+        <input type="text" id="change_id" name="change_id">
+        <button type="submit">Отправить</button><br><br>
+    </form>
+
+    <!-- Создание заявки на УДАЛЕНИЕ ЗАПИСИ по id из таблицы Card базы данных diary.db -->
+    <a href="/card"><img src="/static/img/card_del.png" alt="Изменить сообщение"></a><br>
+        <form action="/", method="POST">
+            <label for="del_id">"УДАЛИТЬ" id:</label>
+            <input type="text" id="del_id" name="del_id">
+            <button type="submit">Отправить</button><br>
+        </form>
+
+
+    <!--  Клик по рисунку - переход на главную страницу "/"-->
+    <a href="/"><img src="/static/img/main_page.png" alt="На главную страницу"></a>
+
+
+
+
+<!-- ВРЕМЕННО НЕ ИСПОЛЬЗУЕТСЯ -->
+<!-- Вывод текущего содержания таблицы Users базы данных diary.db,
+если на главной странице ответ на запрос вывода 'Y' или 'y'  -->
+{% if print_base_user == "Y" or print_base_user == "y" %}
+    <h2>ТАБЛИЦА USERS</h2>
+    {% for user in users %}
+    <h3>
+        <div class="diary">
+            {{user.id}}&emsp;Имя(логин) :&ensp;{{user.username}}&emsp;e-mail :&ensp;{{user.email}}&emsp;Пароль :&ensp;{{user.password}}&emsp;Токен :&ensp;{{user.token}}
+        </div>
+    </h3>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}    
+

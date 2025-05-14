@@ -1,0 +1,33 @@
+<!-- НАСЛЕДНИК ШАБЛОНА index.html -->
+<!-- Обеспечивает содержание блоков "title" и "body" на странице "/home"-->
+
+{% extends 'index.html' %}
+ 
+<!--здесь мы записываем код, который будет исполняться в базовом шаблоне index.html в теге <title> -->
+{% block title %}HOME{% endblock %}
+
+<!--здесь мы записываем код, который будет исполняться в базовом шаблоне index.html внутри тега <body>-->
+{% block content %} 
+
+<!--  Клик по рисунку - переход на страницу "/register"-->
+<a href="/register"><img src="/static/img/register.png" alt="Регистрация"></a>
+<!--  Клик по рисунку - переход на страницу "/login"-->
+<a href="/login"><img src="/static/img/login.png" alt="Войти"></a>
+<!-- Клик по рисунку для выхода из системы -->
+<a href="/logout"><img src="/static/img/logout.png" alt=Выйти"></a><br>
+<!--  Клик по рисунку - переход на главную страницу "/"-->
+<a href="/"><img src="/static/img/main_page.png" alt="На главную страницу"></a>
+
+
+<!-- вывод на экран всех сообщений, накопленных командами flash() при переходе на страницу /home-->
+<h2>{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+{% endwith %}
+</h2>
+
+ 
+{% endblock %}

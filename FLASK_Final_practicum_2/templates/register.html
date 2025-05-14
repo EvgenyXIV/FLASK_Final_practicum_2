@@ -1,0 +1,32 @@
+<!-- НАСЛЕДНИК ШАБЛОНА index.html -->
+<!-- Обеспечивает содержание блоков "title" и "body" на сранице "/register"--> 
+
+{% extends 'index.html' %}
+ 
+<!--здесь мы записываем код, который будет исполняться в базовом шаблоне index.html в теге <title> -->
+{% block title %}регистрация{% endblock %}
+
+<!--здесь мы записываем код, который будет исполняться в базовом шаблоне index.html внутри тега <body>-->
+{% block content %} 
+
+
+<!--  Клик по рисунку - переход на страницу "/home"-->
+<a href="/home"><img src="/static/img/home.png" alt="Домой"></a><br>
+
+<!-- Создание полей и кнопки для ввода записи в таблицу User с регистрационными данными -->
+<h2>Зарегистрироваться</h2>
+<form action="/register", method="POST">    
+
+    <label for="username_m">"логин":</label>
+    <input type="text" id="username_m" name="username_m">
+    
+    <label for="email_m">"e-mail":</label>
+    <input type="text" id="email_m" name="email_m">
+
+    <label for="password_m">"пароль":</label>
+    <input type="text" id="password_m" name="password_m">
+
+    <button type="submit">Отправить</button><br><br>
+</form>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">  <!-- кодировка текста на странице-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Указываем блок-контент для тега <title> у наследников-->
+    <title>{% block title %} FLASK_Final_practicum_2 {% endblock %}</title>
+    <!-- устанавливаем связь шаблона index.html и таблицы стилей index.css,
+         указывая относительный по отношению к __main___ адрес url с учётом того,
+         что по умолчанию __main___ ищет шаблоны и статические файлы
+         в директориях templates и static соответственно-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}" />
+</head>
+
+
+    <body>  <!-- содержимое html-документа -->
+    <img
+         src="{{ url_for('static', filename='img/Synergy.png') }}"
+         alt="здесь будет рисунок"
+         height="75"
+         width="150"
+        /><br>
+    <!-- подпись под рисунком-->
+    <m>Здесь учат</m><br>
+
+    <!-- ниже: заголовок сайта и блок меню при открытии главной страницы-->
+    <h>FLASK_Final_practicum_2</h><br>
+    <p>ДНЕВНИК</p><br>
+
+    {% block content %}
+        <!--  Клик по рисунку - переход на страницу "/home"-->
+        <a href="/home"><img src="/static/img/home.png" alt="Домой"></a><br><br>
+        <!--  Клик по рисунку - переход на страницу "/create"-->
+        <a href="/form_create"><img src="/static/img/card_new.png" alt="Создать сообщение"></a>
+        <!--  Клик по рисунку - переход на страницу "/card"-->
+        <a href="/card"><img src="/static/img/card_change.png" alt="Изменить сообщение"></a>
+        <!--  Клик по рисунку - переход на страницу "/card"-->
+        <a href="/card"><img src="/static/img/card_del.png" alt="Удалить сообщение"></a>
+        <!--  Клик по рисунку - переход на страницу "/card"-->
+        <a href="/card"><img src="/static/img/card_all.png" alt="Дневник почитать"></a><br><br>
+
+<!-- ИЗМЕНЕНИЕ ЗАПИСИ по id в таблице Card базы данных diary.db,
+если на странице "card" ответ на запрос изменения 'Y' или 'y' -->
+    {% if change_id %}
+        <form action="/", method="POST">
+            <h3>
+                Запись в базе:<br>
+                <div class="diary">
+                    {{record.id}}&emsp;
+                    Заголовок/Подзаголовок:&ensp;<h3> {{record.title}} "{{record.subtitle}}"</h3>
+                    <h2>ТЕКСТ:&ensp;{{record.text}}</h2>
+                </div>
+                Изменить на (введите id, незаполненные поля не будут изменены):<br><br>
+            </h3>
+                <label for="change_id_n">"ПОДТВЕРДИТЕ ИЗМЕНИТЬ" id {{change_id}} :</label>
+                <input type="text" id="change_id_n" name="change_id_n">
+
+                <label for="title_n">"Заголовок":</label>
+                <input type="text" id="title_n" name="title_n">
+
+                <label for="subtitle_n">"Подзаголовок":</label>
+                <input type="text" id="subtitle_n" name="subtitle_n">
+
+                <label for="text_n">"Текст":</label>
+                <input type="text" id="text_n" name="text_n">
+
+                <button type="submit">Отправить</button><br>
+        </form>
+    {% endif %}
+
+
+
+<!-- Вывод текущего содержания записи таблицы Card, если на странице "card" ответ на запрос вывода 'Y' или 'y'  -->
+    <style>
+    h3, h4, h5, h6 {display: inline;}
+    </style>
+
+    {% if print_card == "Y" or print_card == "y" %}
+        <h2>ДНЕВНИК</h2>
+        {% for card in cards %}
+        <h5>
+        <div
+             class="diary">
+                {{card.id}}&emsp;
+                Заголовок/Подзаголовок:&ensp;<h3> {{card.title}} "{{card.subtitle}}"</h3>
+                <h2>ТЕКСТ:&ensp;{{card.text}}</h2>
+        </div>
+        </h5>
+        {% endfor %}
+    {% endif %}
+    {% endblock %}
+    </body>
+</html>

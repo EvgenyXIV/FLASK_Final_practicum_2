@@ -1,0 +1,21 @@
+<!-- НАСЛЕДНИК ШАБЛОНА index.html -->
+<!-- Обеспечивает содержание блоков "title" и "body" на странице "/card"-->
+
+{% extends 'index.html' %}
+
+<!--здесь мы записываем код, который будет исполняться в базовом шаблоне index.html в теге <title> -->
+{% block title %}form_create{% endblock %}
+
+<!--здесь мы записываем код, который будет исполняться в базовом шаблоне index.html внутри тега <body>-->
+{% block content %}
+
+<form action="/form_create" method = "POST">
+        <p>Заголовок <label><input type = "text" name = "title" /></label></p>
+        <p>Подзаголовок<label><input type = "text" name = "subtitle" /></label>Текст</p>
+        <p>ТЕКСТ<label><input type = "text" name = "text" /></label>Текст</p>
+        <p><input type = "submit" value = "отправить" /></p><br>
+</form>
+<!--  Клик по рисунку - переход на главную страницу "/"-->
+        <a href="/"><img src="/static/img/main_page.png" alt="На главную страницу"></a>
+
+{% endblock %}
