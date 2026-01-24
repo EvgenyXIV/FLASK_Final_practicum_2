@@ -103,13 +103,14 @@ def login():
             expiration = datetime.now(UTC) + timedelta(minutes=30)  # Задано время жизни регистрации (30 минут)
             session["token"] = token                                # Создана сессия "token" со значением token,
                                                                     #  сессия - объект как словарь{ключ:значение}
-            return redirect("http://127.0.0.1:5000")  # Переход на гл.страницу, если авторизация удачна.
+            flash(f"Пользователь {user.username} успешно зарегистрирован")
+            return redirect("http://127.0.0.1:5000//home")  # Переход на гл.страницу, если авторизация удачна.
         elif user and user.password != request.form["password"]:
             flash("Ошибка в пароле")
             return render_template("login.html")
         else:
             flash("Пользователь не зарегистрирован")
-            return redirect("home")
+            return redirect(url_for("home"))
 
 # Маршрут "/logout" выхода пользователя из системы пользователя по кнопке "Выйти" на странице "/login"
 @app.route('/logout/', methods=["POST", "GET"])
@@ -128,7 +129,7 @@ def home():
 @app.route('/', methods=["POST", "GET"])
 def index():
     # Установка рабочей директории, в которой находится главный py-код (main5.py)
-    os.chdir(r"C:\\Users\\EvgenyMINI_S\\PycharmProjects\\PythonProject\\6_FLASK\\FLASK_Final_practicum_2")
+    os.chdir(r"C:\\Users\\EvgenyMINI_S\\PythonProjects\\PythonProject\\6_FLASK\\FLASK_Final_practicum_2")
 
     global count, change_id  # переменные используются при внесении изменений в таблицы базы данных diary.db
 
