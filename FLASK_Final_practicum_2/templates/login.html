@@ -25,4 +25,14 @@
     <button type="submit">Отправить</button><br><br>
 </form>
 
+<!-- вывод на экран всех сообщений, накопленных командами flash() при переходе на страницу /home-->
+<h2>{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+{% endwith %}
+</h2>
+
 {% endblock %}
