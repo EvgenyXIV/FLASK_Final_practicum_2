@@ -82,19 +82,19 @@
 ## Запуск проекта
 
 1. Установите зависимости:
-   ```bash
+   ```Bash
    pip install -r requirements.txt
 
 2. Инициализируйте базу данных:
-    Bash
-    python
-    >>> from main import app, db
-    >>> app.app_context().push()
-    >>> db.create_all()
-    >>> exit()
+   ```Bash
+   python
+   >>> from main import app, db
+   >>> app.app_context().push()
+   >>> db.create_all()
+   >>> exit()
 
 3. Запустите приложение:
-    Bash
-    python main.py
+   ```Bash
+   python main.py
 
 4. Откройте в браузере: http://127.0.0.1:5000
