@@ -91,6 +91,7 @@
 
 ## 🛠️ Архитектура проекта
 
+```text
 project/
 ├── main.py                  # Основной скрипт Flask
 ├── diary.db                 # База данных SQLite
@@ -105,7 +106,7 @@ project/
 └── static/
 ├── css/index.css        # Стили
 └── img/                 # Иконки и изображения
-
+```
 
 ---
 
